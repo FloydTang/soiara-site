@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOIARA — Sleep in Silk, Wake in Beauty</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --ivory: #FFFFF0;
+      --warm-gray: #f7f5f0;
+      --charcoal: #1d1d1f;
+      --champagne: #D4AF37;
+      --champagne-light: rgba(212, 175, 55, 0.12);
+      --rose-gold: #B76E79;
+      --text-secondary: rgba(29, 29, 31, 0.65);
+      --nav-bg: rgba(247, 245, 240, 0.88);
+      --white: #ffffff;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--charcoal);
+      background: var(--ivory);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Typography */
+    .serif {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      background: var(--nav-bg);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      color: var(--charcoal);
+      text-decoration: none;
+    }
+
+    .nav-logo span {
+      font-style: italic;
+      font-weight: 300;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      display: block;
+      margin-top: -4px;
+      color: var(--text-secondary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--charcoal);
+      text-decoration: none;
+      opacity: 0.75;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      opacity: 1;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 700px;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      background: #0a0a08;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: 
+        linear-gradient(160deg, #f5f0e8 0%, #e8e0d5 30%, #d4c5a9 60%, #c9b896 100%);
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse at 70% 30%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 30% 70%, rgba(183, 110, 121, 0.06) 0%, transparent 40%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 80px 80px;
+      max-width: 700px;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--champagne);
+      margin-bottom: 20px;
+      opacity: 0;
+      transform: translateY(12px);
+      animation: fadeUp 0.8s ease 0.3s forwards;
+    }
+
+    .hero h1 {
+      font-size: clamp(3.5rem, 7vw, 6rem);
+      font-weight: 300;
+      line-height: 1.0;
+      color: var(--ivory);
+      margin-bottom: 24px;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 1s ease 0.5s forwards;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--champagne);
+    }
+
+    .hero-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(247, 245, 240, 0.7);
+      margin-bottom: 40px;
+      line-height: 1.5;
+      opacity: 0;
+      transform: translateY(12px);
+      animation: fadeUp 0.8s ease 0.7s forwards;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 20px;
+      opacity: 0;
+      transform: translateY(12px);
+      animation: fadeUp 0.8s ease 0.9s forwards;
+    }
+
+    .cta-primary {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 32px;
+      background: var(--champagne);
+      color: #1a1a18;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .cta-primary:hover {
+      background: #e8c84a;
+      transform: translateY(-1px);
+    }
+
+    .cta-secondary {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 32px;
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      color: var(--ivory);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .cta-secondary:hover {
+      border-color: var(--champagne);
+      color: var(--champagne);
+    }
+
+    /* Decorative silk element */
+    .hero-silk-line {
+      position: absolute;
+      right: 80px;
+      bottom: 0;
+      width: 1px;
+      height: 40vh;
+      background: linear-gradient(to top, transparent, rgba(212, 175, 55, 0.3), transparent);
+      opacity: 0;
+      animation: fadeIn 1.5s ease 1.2s forwards;
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* Editorial Intro */
+    .editorial-intro {
+      padding: 120px 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .editorial-intro .text-col {
+      padding-right: 40px;
+    }
+
+    .editorial-intro .eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--champagne);
+      margin-bottom: 24px;
+    }
+
+    .editorial-intro h2 {
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 300;
+      line-height: 1.2;
+      color: var(--charcoal);
+      margin-bottom: 32px;
+    }
+
+    .editorial-intro h2 em {
+      font-style: italic;
+      color: var(--rose-gold);
+    }
+
+    .editorial-intro p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+
+    .editorial-intro .image-col {
+      position: relative;
+      height: 560px;
+      background: linear-gradient(135deg, #e8dfd0, #d8cbb8, #c9b896);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .editorial-intro .image-col::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse at 40% 50%, rgba(255,255,240,0.3) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 30%, rgba(212, 175, 55, 0.15) 0%, transparent 50%);
+    }
+
+    .editorial-intro .image-col .silk-texture {
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 2px,
+        rgba(255,255,255,0.03) 2px,
+        rgba(255,255,255,0.03) 4px
+      );
+    }
+
+    /* Products Section */
+    .products {
+      padding: 0 0 120px;
+    }
+
+    .products-header {
+      text-align: center;
+      padding: 100px 80px 60px;
+    }
+
+    .products-header .eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--champagne);
+      margin-bottom: 16px;
+    }
+
+    .products-header h2 {
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-weight: 300;
+      color: var(--charcoal);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .product-card {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      group: product;
+    }
+
+    .product-image {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: linear-gradient(160deg, #f0ebe0, #e0d5c5, #d0c4b0);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.6s ease;
+    }
+
+    .product-card:hover .product-image {
+      transform: scale(1.02);
+    }
+
+    .product-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 60%, rgba(10,10,8,0.3) 100%);
+    }
+
+    .product-image .shimmer {
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%, 100% { left: -100%; }
+      50% { left: 150%; }
+    }
+
+    .product-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 32px 28px;
+      color: var(--ivory);
+    }
+
+    .product-info .category {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--champagne);
+      margin-bottom: 10px;
+    }
+
+    .product-info h3 {
+      font-size: 1.6rem;
+      font-weight: 300;
+      margin-bottom: 8px;
+    }
+
+    .product-info .desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      font-style: italic;
+      opacity: 0.8;
+      margin-bottom: 20px;
+    }
+
+    .product-info .price {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      color: rgba(247, 245, 240, 0.7);
+    }
+
+    /* Ritual Section */
+    .ritual {
+      background: #0a0a08;
+      padding: 140px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ritual::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(ellipse, rgba(212, 175, 55, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .ritual .eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--champagne);
+      margin-bottom: 24px;
+    }
+
+    .ritual h2 {
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 300;
+      color: var(--ivory);
+      margin-bottom: 20px;
+      line-height: 1.1;
+    }
+
+    .ritual h2 em {
+      font-style: italic;
+      color: var(--champagne);
+    }
+
+    .ritual .sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(247, 245, 240, 0.6);
+      max-width: 500px;
+      margin: 0 auto 48px;
+      line-height: 1.6;
+    }
+
+    .ritual-features {
+      display: flex;
+      justify-content: center;
+      gap: 80px;
+      margin-top: 80px;
+    }
+
+    .ritual-feature {
+      text-align: center;
+    }
+
+    .ritual-feature .number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--champagne);
+      opacity: 0.6;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .ritual-feature .label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(247, 245, 240, 0.5);
+    }
+
+    /* Brand Story */
+    .brand-story {
+      background: var(--warm-gray);
+      padding: 140px 80px;
+    }
+
+    .brand-story-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .brand-story .eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--champagne);
+      margin-bottom: 24px;
+    }
+
+    .brand-story blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.4;
+      color: var(--charcoal);
+      margin-bottom: 24px;
+    }
+
+    .brand-story blockquote::before {
+      content: '"';
+      color: var(--champagne);
+    }
+
+    .brand-story blockquote::after {
+      content: '"';
+      color: var(--champagne);
+    }
+
+    .brand-story cite {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      color: var(--text-secondary);
+      font-style: normal;
+    }
+
+    /* Newsletter */
+    .newsletter {
+      padding: 100px 80px;
+      background: var(--ivory);
+      text-align: center;
+    }
+
+    .newsletter-inner {
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .newsletter h2 {
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: var(--charcoal);
+      margin-bottom: 12px;
+    }
+
+    .newsletter p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--text-secondary);
+      margin-bottom: 36px;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 0;
+      border: 1px solid rgba(29, 29, 31, 0.2);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      padding: 14px 20px;
+      border: none;
+      background: transparent;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: var(--charcoal);
+      outline: none;
+    }
+
+    .newsletter-form input::placeholder {
+      color: rgba(29, 29, 31, 0.35);
+    }
+
+    .newsletter-form button {
+      padding: 14px 28px;
+      background: var(--charcoal);
+      color: var(--ivory);
+      border: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .newsletter-form button:hover {
+      background: var(--champagne);
+      color: #1a1a18;
+    }
+
+    /* Footer */
+    footer {
+      background: #0a0a08;
+      padding: 60px 80px 40px;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 60px;
+      padding-bottom: 60px;
+      border-bottom: 1px solid rgba(247, 245, 240, 0.08);
+    }
+
+    .footer-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      color: var(--ivory);
+    }
+
+    .footer-brand span {
+      display: block;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      color: rgba(247, 245, 240, 0.35);
+      margin-top: 4px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 80px;
+    }
+
+    .footer-links-col h4 {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(247, 245, 240, 0.4);
+      margin-bottom: 16px;
+    }
+
+    .footer-links-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-links-col a {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: rgba(247, 245, 240, 0.55);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links-col a:hover {
+      color: var(--champagne);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-bottom p {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 300;
+      color: rgba(247, 245, 240, 0.25);
+      letter-spacing: 0.05em;
+    }
+
+    .footer-bottom .locale {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 300;
+      color: rgba(247, 245, 240, 0.25);
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer-bottom .locale span {
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .footer-bottom .locale span:hover,
+    .footer-bottom .locale span.active {
+      color: var(--champagne);
+    }
+
+    /* Scroll Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .editorial-intro {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        padding: 80px 40px;
+      }
+
+      .editorial-intro .text-col {
+        padding-right: 0;
+      }
+
+      .editorial-intro .image-col {
+        height: 400px;
+      }
+
+      .products-grid {
+        grid-template-columns: 1fr;
+        gap: 2px;
+        padding: 0 20px;
+      }
+
+      .ritual-features {
+        flex-direction: column;
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 0 24px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero-content {
+        padding: 0 24px 60px;
+      }
+
+      .editorial-intro,
+      .brand-story,
+      .newsletter {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .products-header {
+        padding: 60px 24px 40px;
+      }
+
+      .ritual {
+        padding: 80px 24px;
+      }
+
+      footer {
+        padding: 48px 24px 32px;
+      }
+
+      .footer-top {
+        flex-direction: column;
+        gap: 40px;
+      }
+
+      .footer-links {
+        gap: 40px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#" class="nav-logo">
+      SOIARA
+      <span>Paris · Dubai · Moscow</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#products">Collection</a></li>
+      <li><a href="#ritual">The Ritual</a></li>
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Pure Silk · Handcrafted · Since 2025</p>
+      <h1>Sleep in<br><em>Silk</em>,<br>Wake in Beauty</h1>
+      <p class="hero-tagline">100% Mulberry Silk. 19mm Density.<br>Every night, a small ceremony of self-care.</p>
+      <div class="hero-ctas">
+        <a href="#products" class="cta-primary">Explore Collection</a>
+        <a href="#story" class="cta-secondary">Our Story</a>
+      </div>
+    </div>
+    <div class="hero-silk-line"></div>
+  </section>
+
+  <!-- Editorial Intro -->
+  <section class="editorial-intro">
+    <div class="text-col reveal">
+      <p class="eyebrow">The SOIARA Way</p>
+      <h2>Silk that cares<br>for your <em>skin</em><br>and soul</h2>
+      <p>We source only the finest Grade 6A mulberry silk, woven at 19mm density — the industry standard for true luxury. Every thread is selected for its natural sheen, breathability, and gentleness on skin and hair.</p>
+      <p>No synthetic blends. No compromises. Just pure, centuries-old silk craft, reimagined for the modern woman.</p>
+    </div>
+    <div class="image-col reveal">
+      <div class="silk-texture"></div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section class="products" id="products">
+    <div class="products-header reveal">
+      <p class="eyebrow">The Collection</p>
+      <h2>Elevate Every Night</h2>
+    </div>
+    <div class="products-grid">
+      <div class="product-card reveal">
+        <div class="product-image" style="background: linear-gradient(160deg, #f5f0e5 0%, #e8dcc8 50%, #d8cbb5 100%);">
+          <div class="shimmer"></div>
+        </div>
+        <div class="product-info">
+          <p class="category">Pillowcase</p>
+          <h3>Silk Pillowcase</h3>
+          <p class="desc">22mm Mulberry Silk · Envelope Closure</p>
+          <p class="price">From $68 · USD</p>
+        </div>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-image" style="background: linear-gradient(160deg, #eee5d8 0%, #ddd0bc 50%, #cbbfa5 100%);">
+          <div class="shimmer"></div>
+        </div>
+        <div class="product-info">
+          <p class="category">Eye Mask</p>
+          <h3>Silk Eye Mask</h3>
+          <p class="desc">100% Silk · Adjustable Strap · Contoured</p>
+          <p class="price">From $42 · USD</p>
+        </div>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-image" style="background: linear-gradient(160deg, #e5dcd0 0%, #d5cbb8 50%, #c5b8a5 100%);">
+          <div class="shimmer"></div>
+        </div>
+        <div class="product-info">
+          <p class="category">Scrunchie</p>
+          <h3>Silk Scrunchie</h3>
+          <p class="desc">100% Silk · Gentle on Hair · Set of 3</p>
+          <p class="price">From $32 · USD</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ritual -->
+  <section class="ritual" id="ritual">
+    <div class="reveal">
+      <p class="eyebrow">The Philosophy</p>
+      <h2>More than a product.<br>A <em>ritual</em>.</h2>
+      <p class="sub">Your nightly skincare ritual begins the moment your head touches silk. Wake with fewer sleep lines, less frizz, and skin that glows.</p>
+      <div class="hero-ctas" style="justify-content: center; opacity: 1; transform: none;">
+        <a href="#" class="cta-primary" style="background: transparent; border: 1px solid var(--champagne); color: var(--champagne);">Shop Now</a>
+      </div>
+    </div>
+    <div class="ritual-features reveal">
+      <div class="ritual-feature">
+        <div class="number">19mm</div>
+        <div class="label">Silk Density</div>
+      </div>
+      <div class="ritual-feature">
+        <div class="number">100%</div>
+        <div class="label">Mulberry Silk</div>
+      </div>
+      <div class="ritual-feature">
+        <div class="number">Grade</div>
+        <div class="label">6A Quality</div>
+      </div>
+      <div class="ritual-feature">
+        <div class="number">OEKO</div>
+        <div class="label">Certified Safe</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Brand Story -->
+  <section class="brand-story" id="story">
+    <div class="brand-story-inner reveal">
+      <p class="eyebrow">Our Story</p>
+      <blockquote>SOIARA was born from a simple belief: the ordinary act of sleeping should feel like a luxury.</blockquote>
+      <cite>— Founded 2025, Paris</cite>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="newsletter" id="contact">
+    <div class="newsletter-inner reveal">
+      <h2>Join the Ritual</h2>
+      <p>Be first to know about new collections and exclusive offers.</p>
+      <form class="newsletter-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent = 'Thank you'; this.querySelector('button').style.background='var(--champagne)'">
+        <input type="email" placeholder="Your email address" required>
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        SOIARA
+        <span>Sleep in Silk, Wake in Beauty</span>
+      </div>
+      <div class="footer-links">
+        <div class="footer-links-col">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="#">Pillowcases</a></li>
+            <li><a href="#">Eye Masks</a></li>
+            <li><a href="#">Scrunchies</a></li>
+            <li><a href="#">Gift Sets</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-col">
+          <h4>About</h4>
+          <ul>
+            <li><a href="#">Our Story</a></li>
+            <li><a href="#">Silk Guide</a></li>
+            <li><a href="#">Sustainability</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-col">
+          <h4>Account</h4>
+          <ul>
+            <li><a href="#">Sign In</a></li>
+            <li><a href="#">Orders</a></li>
+            <li><a href="#">Wishlist</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 SOIARA. All rights reserved.</p>
+      <div class="locale">
+        <span class="active">USD $</span>
+        <span>AED د.إ</span>
+        <span>RUB ₽</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
