@@ -118,10 +118,9 @@
     .hero-bg {
       position: absolute;
       inset: 0;
-      background: 
-        linear-gradient(160deg, #f5f0e8 0%, #e8e0d5 30%, #d4c5a9 60%, #c9b896 100%);
-      background-size: cover;
-      background-position: center;
+      background: url(images/hero.jpg) center/cover no-repeat;
+      background-size: 110% auto;
+      animation: kenburns 18s ease-in-out infinite alternate;
     }
 
     .hero-bg::after {
@@ -129,8 +128,14 @@
       position: absolute;
       inset: 0;
       background: 
-        radial-gradient(ellipse at 70% 30%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
-        radial-gradient(ellipse at 30% 70%, rgba(183, 110, 121, 0.06) 0%, transparent 40%);
+        linear-gradient(to bottom, rgba(10,10,8,0.15) 0%, rgba(10,10,8,0.55) 100%),
+        radial-gradient(ellipse at 70% 30%, rgba(212, 175, 55, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 30% 70%, rgba(183, 110, 121, 0.04) 0%, transparent 40%);
+    }
+
+    @keyframes kenburns {
+      0%   { background-size: 110% auto; background-position: 50% 50%; }
+      100% { background-size: 115% auto; background-position: 55% 48%; }
     }
 
     .hero-content {
@@ -410,6 +415,7 @@
       right: 0;
       padding: 32px 28px;
       color: var(--ivory);
+      background: linear-gradient(to bottom, transparent 0%, rgba(10,10,8,0.3) 100%);
     }
 
     .product-info .category {
@@ -426,14 +432,16 @@
       font-size: 1.6rem;
       font-weight: 300;
       margin-bottom: 8px;
+      color: var(--ivory);
     }
 
     .product-info .desc {
       font-family: 'Cormorant Garamond', serif;
       font-size: 0.95rem;
       font-style: italic;
-      opacity: 0.8;
+      opacity: 0.85;
       margin-bottom: 20px;
+      color: rgba(247, 245, 240, 0.9);
     }
 
     .product-info .price {
@@ -441,7 +449,7 @@
       font-size: 0.85rem;
       font-weight: 300;
       letter-spacing: 0.05em;
-      color: rgba(247, 245, 240, 0.7);
+      color: rgba(247, 245, 240, 0.8);
     }
 
     /* Ritual Section */
@@ -457,7 +465,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, rgba(10,10,8,0.7) 0%, rgba(10,10,8,0.85) 100%);
+      background: linear-gradient(to bottom, rgba(10,10,8,0.35) 0%, rgba(10,10,8,0.45) 100%);
       pointer-events: none;
     }
 
